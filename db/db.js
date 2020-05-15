@@ -40,8 +40,10 @@ db.Sequelize = Sequelize;
 //Models/tables
 db.User = require('../models/user')(sequelize, Sequelize);
 db.Role = require('../models/role')(sequelize, Sequelize);
-db.Producer = require('../models/Producer')(sequelize, Sequelize);
-db.Product = require('../models/Product')(sequelize, Sequelize);
+db.Producer = require('../models/producer')(sequelize, Sequelize);
+db.Product = require('../models/product')(sequelize, Sequelize);
+db.OrderPosition = require('../models/orderposition')(sequelize, Sequelize);
+db.Order = require('../models/order')(sequelize, Sequelize);
 
 
 //Связывание моделей без импорта файлов ( то есть, чтобы в файле описания любой модели можно было

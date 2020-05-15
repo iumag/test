@@ -1,43 +1,43 @@
 const db = require('../db/db');
-const role = db.Role;
+const product = db.Product;
 
 function create(req, res) {
-    role.create(
+    product.create(
         req.body
     )
-        .then(res => {
-            res.json(res);
+        .then(result => {
+            res.json(result.dataValues);
         })
         .catch(err => res.json(err));
 }
 function getAll(req, res){
-    console.log( role)
-    role.findAll()
-        .then(user => {
-            res.json(user);
+    console.log( product)
+    product.findAll()
+        .then(result => {
+            res.json(result);
         })
         .catch(err => res.json(err));
 }
 function get(req, res){
-    role.findAll({where: { id: req.params.id }})
-        .then(user => {
-            res.json(user[0]);
+    product.findAll({where: { id: req.params.id }})
+        .then(result => {
+            res.json(result[0]);
         })
         .catch(err => res.json(err));
 }
 function update(req, res) {
-    role.update( req.body, { where: { id: req.params.id } })
-        .then(updatedUser => {
-            res.json(updatedUser);
+    product.update( req.body, { where: { id: req.params.id } })
+        .then(updated => {
+            res.json(updated);
         })
         .catch(err => res.json(err));
 }
 function deleteById(req, res) {
-    role.destroy({
+    product.destroy({
         where: { id: req.params.id }
     })
-        .then(user => {
-            res.json(user);
+        .then(result => {
+            res.json(result);
         })
         .catch(err => res.json(err));
 }

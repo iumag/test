@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
   Product.associate = function(models) {
     Product.belongsTo(models.Producer,{
       foreignKey: 'producer_id'
+    });
+    Product.hasMany(models.OrderPosition, {
+      foreignKey: 'product_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      sourceKey: 'id'
     })
   };
   return Product;

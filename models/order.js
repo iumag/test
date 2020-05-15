@@ -2,10 +2,20 @@
 module.exports = (sequelize, DataTypes) => {
   const Order = sequelize.define('Order', {
     number: DataTypes.STRING,
-    order_date: DataTypes.DATE
+    order_date: DataTypes.DATE,
+    user_id: DataTypes.INTEGER
   }, {});
   Order.associate = function(models) {
-    // associations can be defined here
+    Order.belongsTo(models.User,{
+      foreignKey: 'user_id',
+      targetKey: 'id'
+    })
+    Order.hasMany(models.OrderPosition, {
+      foreignKey: 'order_id',
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE',
+      sourceKey: 'id'
+    })
   };
   return Order;
 };

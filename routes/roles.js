@@ -1,6 +1,6 @@
 const express = require('express');
 let router = express.Router();
-let roleController = require('../controllers/RoleController');
+let roleController = require('../controllers/roleController');
 
 /* GET users listing. */
 router.get("/", roleController.getAll);

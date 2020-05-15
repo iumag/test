@@ -6,6 +6,8 @@ const logger = require('morgan');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const roleRouter = require('./routes/roles');
+const productRouter = require('./routes/products');
+const producerRouter = require('./routes/producers');
 
 const bodyParser = require('body-parser');
 let app = express();
@@ -20,6 +22,8 @@ app.use(bodyParser.json());
 
 app.use('/users', usersRouter);
 app.use('/roles', roleRouter);
+app.use('/products', productRouter);
+app.use('/producers', producerRouter);
 //app.use('/test', testRoutes)
 
 module.exports = app;
