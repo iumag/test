@@ -24,6 +24,6 @@ app.use('/users', usersRouter);
 app.use('/roles', roleRouter);
 app.use('/products', productRouter);
 app.use('/producers', producerRouter);
-//app.use('/orders', orderRouter);
+app.use('/orders', orderRouter);
 
 module.exports = app;
