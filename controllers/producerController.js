@@ -28,7 +28,11 @@ function get(req, res){
 function update(req, res) {
     producer.update( req.body, { where: { id: req.params.id } })
         .then(updated => {
-            res.json(updated);
+            producer.findAll({where: { id: req.params.id}})
+                .then(result => {
+                    res.json(result[0]);
+                })
+                .catch(err => res.json(err));
         })
         .catch(err => res.json(err));
 }
@@ -37,7 +41,7 @@ function deleteById(req, res) {
         where: { id: req.params.id }
     })
         .then(result => {
-            res.json(result);
+            res.json({status:'deleted'});
         })
         .catch(err => res.json(err));
 }

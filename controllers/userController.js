@@ -6,7 +6,7 @@ function create(req, res) {
         req.body
     )
         .then(crete => {
-            res.json({id: crete.dataValues.id});
+            res.json(crete.dataValues);
         })
         .catch(err => res.json(err));
 }
@@ -30,7 +30,11 @@ function get(req, res){
 function update(req, res) {
     User.update( req.body, { where: { id: req.params.id } })
         .then(updatedUser => {
-            res.json(updatedUser);
+            User.findAll({ include:[db.Role], where: { id: req.params.id}})
+                .then(user => {
+                    res.json(user[0]);
+                })
+                .catch(err => res.json(err));
         })
         .catch(err => res.json(err));
 }
@@ -39,7 +43,7 @@ function deleteById(req, res) {
         where: { id: req.params.id }
     })
         .then(user => {
-            res.json(user);
+            res.json({status:'deleted'});
         })
         .catch(err => res.json(err));
 }

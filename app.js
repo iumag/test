@@ -3,11 +3,11 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const roleRouter = require('./routes/roles');
 const productRouter = require('./routes/products');
 const producerRouter = require('./routes/producers');
+const orderRouter = require('./routes/orders');
 
 const bodyParser = require('body-parser');
 let app = express();
@@ -24,6 +24,6 @@ app.use('/users', usersRouter);
 app.use('/roles', roleRouter);
 app.use('/products', productRouter);
 app.use('/producers', producerRouter);
-//app.use('/test', testRoutes)
+//app.use('/orders', orderRouter);
 
 module.exports = app;

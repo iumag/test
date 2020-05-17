@@ -12,14 +12,14 @@ function create(req, res) {
 }
 function getAll(req, res){
     console.log( product)
-    product.findAll()
+    product.findAll({ include:[db.Producer]})
         .then(result => {
             res.json(result);
         })
         .catch(err => res.json(err));
 }
 function get(req, res){
-    product.findAll({where: { id: req.params.id }})
+    product.findAll({include:[db.Producer], where: { id: req.params.id }})
         .then(result => {
             res.json(result[0]);
         })
@@ -28,7 +28,11 @@ function get(req, res){
 function update(req, res) {
     product.update( req.body, { where: { id: req.params.id } })
         .then(updated => {
-            res.json(updated);
+            product.findAll({include:[db.Producer], where: { id: req.params.id }})
+                .then(result => {
+                    res.json(result[0]);
+                })
+                .catch(err => res.json(err));
         })
         .catch(err => res.json(err));
 }
@@ -37,7 +41,7 @@ function deleteById(req, res) {
         where: { id: req.params.id }
     })
         .then(result => {
-            res.json(result);
+            res.json({status:'deleted'});
         })
         .catch(err => res.json(err));
 }

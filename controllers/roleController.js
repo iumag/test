@@ -28,7 +28,11 @@ function get(req, res){
 function update(req, res) {
     role.update( req.body, { where: { id: req.params.id } })
         .then(updatedRole => {
-            res.json(updatedRole);
+            role.findAll({where: { id: req.params.id}})
+                .then(role => {
+                    res.json(role[0]);
+                })
+                .catch(err => res.json(err));
         })
         .catch(err => res.json(err));
 }
@@ -37,7 +41,7 @@ function deleteById(req, res) {
         where: { id: req.params.id }
     })
         .then(role => {
-            res.json(role);
+            res.json({status:'deleted'});
         })
         .catch(err => res.json(err));
 }
